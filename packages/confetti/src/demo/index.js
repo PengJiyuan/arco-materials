@@ -2,8 +2,8 @@
  * @file
  * @name 组件名
  * @memberOf 组件类型，例如：数据输入
- * @description 描述你的组件。
- * @author 物料作者
+ * @description 点击触发五彩纸屑效果。
+ * @author PengJiyuan
  * @package arco-confetti
  */
 

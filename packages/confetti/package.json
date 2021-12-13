@@ -27,7 +27,7 @@
   "peerDependencies": {
     "react": ">=16",
     "react-dom": "^16.0.1",
-    "@arco-design/web-react": ">=2.0.0"
+    "@arco-design/web-react": ">2.0.0"
   },
   "sideEffects": [
     "dist/**/*",
@@ -35,17 +35,20 @@
     "*.less"
   ],
   "license": "MIT",
+  "files": [
+    "es",
+    "lib",
+    "dist",
+    "docs"
+  ],
+  "dependencies": {
+    "canvas-confetti": "^1.4.0"
+  },
   "arcoMeta": {
     "type": "react-component",
     "title": "按钮烟花",
     "category": [
       "数据展示"
     ]
-  },
-  "files": [
-    "es",
-    "lib",
-    "dist",
-    "docs"
-  ]
+  }
 }

@@ -1,0 +1,21 @@
+{
+  "name": "arco-confetti",
+  "title": "五彩纸屑",
+  "description": "点击触发五彩纸屑效果",
+  "type": "react-component",
+  "category": [
+    "数据展示"
+  ],
+  "group": 0,
+  "homepage": "",
+  "repository": "",
+  "author": "PengJiyuan",
+  "screenshot": "",
+  "package": {
+    "name": "arco-confetti",
+    "version": "latest",
+    "type": "npm",
+    "registry": "",
+    "peerDependencies": []
+  }
+}
