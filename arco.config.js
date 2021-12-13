@@ -1,11 +1,10 @@
 module.exports = {
   // globs to your packages
-  // e.g. [ 'packages/*' ]
-  packages: [],
+  packages: ['packages/*'],
   // command you want to replace 'arco subCommand'
   // e.g. publish: 'lerna publish'
   alias: {
-    publish: '',
+    publish: 'lerna publish',
   },
   // initial meta for 'arco generate'
   initialMeta: {
