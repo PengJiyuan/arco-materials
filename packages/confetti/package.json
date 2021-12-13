@@ -25,7 +25,6 @@
     "preview": "arco preview"
   },
   "peerDependencies": {
-    "@arco-design/web-react": ">2.0.0",
     "react": ">=16",
     "react-dom": "^16.0.1"
   },

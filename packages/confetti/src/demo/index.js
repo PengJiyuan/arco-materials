@@ -9,6 +9,6 @@
 
 /**
  * @name 基本用法
- * @description 描述你的例子
+ * @description 点击按钮发射五彩纸屑吧～
  */
 export { default as Basic } from './basic';
