@@ -91,10 +91,4 @@ export interface ConfettiButtonProps {
    * @defaultValue 1
    */
   scalar?: number;
-  /**
-   * @zh 五彩纸屑效果挂载的父容器
-   * @en The container of confetti
-   * @defaultValue () => document.body
-   */
-  getContainer?: (element) => ReactNode;
 }

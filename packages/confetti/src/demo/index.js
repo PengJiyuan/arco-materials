@@ -9,6 +9,8 @@
 
 /**
  * @name 基本用法
- * @description 点击按钮发射五彩纸屑吧～
+ * @description
+ * 点击按钮发射五彩纸屑吧～
+ * 异步触发只需要在 onClick 中返回一个 Promise 即可。
  */
 export { default as Basic } from './basic';

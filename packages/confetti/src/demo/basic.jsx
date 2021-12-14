@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@arco-design/web-react';
 import { IconThumbUp } from '@arco-design/web-react/icon';
 import ArcoConfetti from 'arco-confetti';
@@ -12,12 +12,32 @@ const wrapperStyle = {
 };
 
 export default function Demo() {
+  const [awesome, setAwesome] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   return (
     <div style={wrapperStyle}>
-      <ArcoConfetti>
-        <Button type="primary" shape="circle" size="large">
-          <IconThumbUp style={{ fontSize: 18, verticalAlign: -4 }} />
-        </Button>
+      <ArcoConfetti disabled={awesome}>
+        <Button
+          type={!awesome ? 'outline' : 'primary'}
+          shape="circle"
+          size="large"
+          loading={loading}
+          icon={<IconThumbUp style={{ fontSize: 18, verticalAlign: -4 }} />}
+          onClick={() => {
+            if (!awesome) {
+              setLoading(true);
+              return new Promise((resolve) => {
+                setTimeout(() => {
+                  setLoading(false);
+                  setAwesome(true);
+                  resolve();
+                }, 1500);
+              });
+            }
+            setAwesome(false);
+          }}
+        />
       </ArcoConfetti>
     </div>
   );

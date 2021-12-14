@@ -33,7 +33,6 @@ function ConfettiButton(props: ConfettiButtonProps) {
   const {
     children,
     disabled,
-    getContainer = () => document.body,
     particleCount = 60,
     angle = 90,
     startVelocity = 25,
@@ -50,25 +49,24 @@ function ConfettiButton(props: ConfettiButtonProps) {
   const canvas = useRef(null);
   const timer = useRef(null);
 
-  const container = getContainer(buttonRef.current);
+  const container = document.body;
 
   function createConfetti() {
     const { left, top, width } = getElementPosition(buttonRef.current, container);
-    const _container = container as Element;
-    const containerWidth = _container.scrollWidth;
-    const containerHeight = _container.scrollHeight;
+    const containerWidth = container.scrollWidth;
+    const containerHeight = container.scrollHeight;
 
     if (!canvas.current) {
       canvas.current = document.createElement('canvas');
       canvas.current.style.width = `${containerWidth}px`;
       canvas.current.style.height = `${containerHeight}px`;
       canvas.current.style.pointerEvents = 'none';
-      canvas.current.style.position = 'absolute';
+      canvas.current.style.position = 'fixed';
       canvas.current.style.top = '0px';
       canvas.current.style.left = '0px';
       canvas.current.style.zIndex = 9999999;
 
-      _container.appendChild(canvas.current);
+      container.appendChild(canvas.current);
     }
 
     const myConfetti = confetti.create(canvas.current, {
@@ -85,33 +83,50 @@ function ConfettiButton(props: ConfettiButtonProps) {
     return { myConfetti, innerConfettiProps };
   }
 
-  function onClickButton() {
-    if (disabled) {
-      return;
+  function onClickButton(e) {
+    const originOnClick =
+      children && (children as ReactElement).props && (children as ReactElement).props.onClick;
+    const ret = originOnClick && originOnClick(e);
+    if (ret && ret.then) {
+      ret
+        .then(() => {
+          fireConfetti();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      fireConfetti();
     }
-    clearTimeout(timer.current);
 
-    const { myConfetti, innerConfettiProps } = createConfetti();
+    function fireConfetti() {
+      if (disabled) {
+        return;
+      }
+      clearTimeout(timer.current);
 
-    myConfetti({
-      ...innerConfettiProps,
-      particleCount,
-      angle,
-      startVelocity,
-      spread,
-      decay,
-      gravity,
-      ticks,
-      drift,
-      colors,
-      shapes,
-      scalar,
-    });
-    timer.current = setTimeout(() => {
-      myConfetti.reset();
-      document.body.removeChild(canvas.current);
-      canvas.current = null;
-    }, 3000);
+      const { myConfetti, innerConfettiProps } = createConfetti();
+
+      myConfetti({
+        ...innerConfettiProps,
+        particleCount,
+        angle,
+        startVelocity,
+        spread,
+        decay,
+        gravity,
+        ticks,
+        drift,
+        colors,
+        shapes,
+        scalar,
+      });
+      timer.current = setTimeout(() => {
+        myConfetti.reset();
+        document.body.removeChild(canvas.current);
+        canvas.current = null;
+      }, 3000);
+    }
   }
 
   return React.cloneElement(children as ReactElement, { ref: buttonRef, onClick: onClickButton });
