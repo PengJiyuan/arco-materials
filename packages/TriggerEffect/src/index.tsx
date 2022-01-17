@@ -5,22 +5,54 @@ import React, { useRef, useEffect, cloneElement, ReactNode } from 'react';
  */
 export interface TriggerEffectProps {
   children?: ReactNode;
+  /**
+   * @zh 动画的类型
+   * @defaultValue ripple
+   */
+  type?: 'ripple' | 'wave';
+  /**
+   * @zh 触发动画的方式
+   * @defaultValue click
+   */
   trigger?: 'hover' | 'click';
+  /**
+   * @zh 动画持续的时长
+   * @defaultValue 600
+   */
   duration?: number;
+  /**
+   * @zh wave 类型的动画颜色
+   * @defaultValue #0288d1
+   */
+  waveColor?: string;
 }
 
 const TriggerEffect = (props: TriggerEffectProps) => {
-  const { children, duration = 600 } = props;
+  const { children, duration = 600, type = 'ripple', waveColor = '#0288d1' } = props;
 
   const ref = useRef(null);
   const wrapper = useRef(null);
   const timer = useRef(null);
 
   useEffect(() => {
-    ref.current.addEventListener('click', addTriggerEffect);
+    if (type === 'ripple') {
+      ref.current.addEventListener('click', addRippleEffect);
+    }
+    if (type === 'wave') {
+      ref.current.addEventListener('click', addWaveEffect);
+    }
+
+    return () => {
+      if (type === 'ripple') {
+        ref.current.removeEventListener('click', addRippleEffect);
+      }
+      if (type === 'wave') {
+        ref.current.removeEventListener('click', addWaveEffect);
+      }
+    };
   }, []);
 
-  function addTriggerEffect(e) {
+  function addRippleEffect(e) {
     clearTimeout(timer.current);
     timer.current = null;
 
@@ -57,6 +89,22 @@ const TriggerEffect = (props: TriggerEffectProps) => {
       ref.current.removeChild(wrapper.current);
       wrapper.current = null;
     }, duration + 50);
+  }
+
+  function addWaveEffect() {
+    clearTimeout(timer.current);
+    timer.current = null;
+
+    const canvas = document.createElement('span');
+    canvas.setAttribute('class', 'arco-te-wave');
+
+    ref.current.appendChild(canvas);
+
+    canvas.setAttribute('style', `outline-color:${waveColor};animation-duration:${duration}ms;`);
+
+    setTimeout(() => {
+      ref.current.removeChild(canvas);
+    }, duration);
   }
 
   const child = React.Children.only(children) as any;

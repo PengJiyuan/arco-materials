@@ -8,7 +8,7 @@ function Demo() {
   return (
     <div style={{ padding: 300 }}>
       <TriggerEffect>
-        <Button size="large" type="primary" status="danger" ref={ref}>
+        <Button size="large" ref={ref}>
           Click Me
         </Button>
       </TriggerEffect>

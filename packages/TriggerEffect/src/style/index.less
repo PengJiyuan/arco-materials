@@ -9,10 +9,9 @@
 
 .arco-te-ripple {
   position: absolute;
-  animation-name: ripple;
+  animation-name: te-ripple;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  background: rgba(255, 255, 255, 0.6);
-  // background: rgba(0, 0, 0, 0.6);
+  background: currentColor;
   border-radius: 50%;
   opacity: 0;
 
@@ -22,7 +21,7 @@
   }
 }
 
-@keyframes ripple {
+@keyframes te-ripple {
   0% {
     transform: scale(0);
     opacity: 0.3;
@@ -30,6 +29,32 @@
 
   100% {
     transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.arco-te-wave {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  overflow: hidden;
+  outline-width: 6px;
+  outline-style: solid;
+  animation-name: te-wave;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+}
+
+@keyframes te-wave {
+  0% {
+    outline-width: 1px;
+    opacity: 0.6;
+  }
+
+  100% {
+    outline-width: 6px;
     opacity: 0;
   }
 }
