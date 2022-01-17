@@ -1,6 +1,21 @@
-import React from 'react';
-import TooltipButton from 'arco-trigger-effect';
+import React, { useRef } from 'react';
+import { Button } from '@arco-design/web-react';
+import TriggerEffect from 'arco-trigger-effect';
+
+function Demo() {
+  const ref = useRef(null);
+
+  return (
+    <div style={{ padding: 300 }}>
+      <TriggerEffect>
+        <Button size="large" type="primary" status="danger" ref={ref}>
+          Click Me
+        </Button>
+      </TriggerEffect>
+    </div>
+  );
+}
 
 export default () => {
-  return <TooltipButton title="tooltip title">Demo Basic</TooltipButton>;
+  return <Demo />;
 };
