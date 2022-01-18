@@ -21,14 +21,14 @@ export interface TriggerEffectProps {
    */
   duration?: number;
   /**
-   * @zh wave 类型的动画颜色
-   * @defaultValue #0288d1
+   * @zh wave 类型的动画配置
+   * @defaultValue {color: '#0288d1'}
    */
-  waveColor?: string;
+  waveProps?: { color?: string };
 }
 
 const TriggerEffect = (props: TriggerEffectProps) => {
-  const { children, duration = 600, type = 'ripple', waveColor = '#0288d1' } = props;
+  const { children, duration = 600, type = 'ripple', waveProps = {} } = props;
 
   const ref = useRef(null);
   const wrapper = useRef(null);
@@ -100,6 +100,7 @@ const TriggerEffect = (props: TriggerEffectProps) => {
 
     ref.current.appendChild(canvas);
 
+    const waveColor = waveProps.color || '#0288d1';
     canvas.setAttribute('style', `outline-color:${waveColor};animation-duration:${duration}ms;`);
 
     setTimeout(() => {
