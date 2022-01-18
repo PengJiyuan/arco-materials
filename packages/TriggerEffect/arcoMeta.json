@@ -16,6 +16,10 @@
     "version": "latest",
     "type": "npm",
     "registry": "",
-    "peerDependencies": []
+    "peerDependencies": [
+      "@arco-design/web-react",
+      "react",
+      "react-dom"
+    ]
   }
 }
