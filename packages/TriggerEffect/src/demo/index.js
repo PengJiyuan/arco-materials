@@ -9,6 +9,6 @@
 
 /**
  * @name 基本用法
- * @description 描述你的例子
+ * @description 有两种动画形式，ripple -> 涟漪，wave -> 波浪。
  */
 export { default as Basic } from './basic';
